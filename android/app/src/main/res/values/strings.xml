@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BBMM by WebFlex</string>
+    <string name="about_text">BlackBerry Multi-Messenger\nUnified inbox: WhatsApp · SMS · Instagram\nPowered by WebFlex · webflex.cz</string>
+    <string name="title_messages">Messages</string>
+    <string name="hint_message">Type a message</string>
+    <string name="send">Send</string>
+    <string name="title_settings">Settings</string>
+    <string name="label_backend_url">Backend URL</string>
+    <string name="label_api_token">API Token</string>
+    <string name="hint_backend_url">http://192.168.1.100:3000</string>
+    <string name="hint_api_token">Enter your API token</string>
+    <string name="save">Save</string>
+    <string name="settings_saved">Settings saved</string>
+    <string name="settings_required">Backend URL and API Token are required</string>
+</resources>

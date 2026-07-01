@@ -16,21 +16,29 @@ custom TLS 1.2, AlarmManager). Rozšíření pro multi-síť: `network` pole v d
 modelu + pluggable gateway vrstva per síť.
 
 ## Stav / poznámky
-**2026-07-01 — start.** Baseline template commitnut (git init). Prostudována
-reference BBWA. Nainstalováno + zvetováno Antigravity CLI (`agy`) a napojeno do
-`council` místo rozbitého gemini legu (viz GLOBAL-MEMORY). Research feasibility
-hotový (viz native memory `multi-network-bridge-feasibility`): WhatsApp přes
-Evolution API v2 / mautrix, IG přes mautrix-meta, SMS přes Android SMS gateway
-(textbee/httpSMS), **TikTok DM nemá viable API** (jen fragile unofficial). Běží
-council na volbu backend architektury (Matrix+mautrix bridges vs per-síť gateway
-agregace). Pozor: NEspouštět `npx ruflo init` (přepíše config).
+**2026-07-01 — MVP postaven.** Architektura rozhodnuta councilem (ADR-0001,
+native memory `backend-architecture-decision`): **Option B per-network aggregace**.
+
+- **`backend/`** — HOTOVO + Codex-reviewed (6/6 nálezů opraveno). Node/Express
+  unified cache + REST (`/chats`, `/chat/:id`, `/send`, `/webhook/:network`,
+  `/status`). Gateways: whatsapp (Evolution API v2), sms (SMSGate). instagram =
+  loud-fail placeholder (staví se poslední), tiktok = disabled stub. Boot + full
+  pipeline otestován (SMS+WA webhook → unified /chats, auth, dedupe, caps).
+- **`android/`** — thin-client napsán (`cz.webflex.bbmm`, API 18, port BBWA +
+  `network` badge + network status). Text-focused MVP (image/reactions =
+  follow-up). Resource cross-check + XML OK; build ověřován (Gradle 7.6.4).
+- **Rollout:** WhatsApp+SMS = MVP (hotovo v kódu), Instagram (mautrix-meta) fast-
+  follow, TikTok jen stub.
+
+Infra: Antigravity CLI (`agy`) zvetováno + napojeno do `council` místo gemini
+(GLOBAL-MEMORY). **Pozor:** NEspouštět `npx ruflo init` (přepíše config).
 
 <!-- AUTO:INVENTORY (generuje refresh-project-map — needituj ručně) -->
 **Stack:** Node
 
-**Adresáře:** `scripts`
+**Adresáře:** `android`, `backend`, `docs`, `scripts`
 
-**Soubory:** `.mcp.json.disabled`, `CLAUDE.md`, `council_stderr.log`, `package.json`
+**Soubory:** `.mcp.json.disabled`, `CLAUDE.md`, `package.json`
 
 _Refreshed: 2026-07-01 · `refresh-project-map`_
 <!-- /AUTO:INVENTORY -->
