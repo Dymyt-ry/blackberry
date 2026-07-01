@@ -8,3 +8,11 @@ node_modules/
 .env.*
 !.env.example
 /tmp/
+
+# backend runtime
+backend/data/
+# android build output
+android/app/build/
+android/.gradle/
+android/local.properties
+*.apk
