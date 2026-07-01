@@ -1,0 +1,10 @@
+node_modules/
+.swarm/
+.claude-flow/
+.ruflo/
+*.log
+.DS_Store
+.env
+.env.*
+!.env.example
+/tmp/
