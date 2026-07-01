@@ -110,8 +110,32 @@ function handleWebhook(req, res) {
   }
 }
 
+// Register this backend's webhook URL with Evolution API on startup.
+// Fires-and-forgets; never crashes the process on failure.
+function init() {
+  var webhookUrl = config.whatsapp.webhookUrl;
+  if (!webhookUrl) {
+    console.warn('[whatsapp] EVO_WEBHOOK_URL not set — webhook not auto-registered');
+    return;
+  }
+  var url = config.whatsapp.apiUrl + '/webhook/set/' + config.whatsapp.instance;
+  axios.post(url, {
+    url: webhookUrl,
+    webhook_by_events: false,
+    webhook_base64: false,
+    events: ['MESSAGES_UPSERT', 'MESSAGES_UPDATE', 'CONNECTION_UPDATE']
+  }, {
+    headers: { apikey: config.whatsapp.apiKey, 'Content-Type': 'application/json' }
+  }).then(function () {
+    console.log('[whatsapp] webhook registered → ' + webhookUrl);
+  }).catch(function (e) {
+    console.error('[whatsapp] webhook registration failed: ' + e.message);
+  });
+}
+
 module.exports = {
   id: NETWORK,
+  init: init,
   sendCapability: true,
   sendText: sendText,
   handleWebhook: handleWebhook

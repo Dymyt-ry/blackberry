@@ -29,7 +29,8 @@ var config = {
   whatsapp: {
     apiUrl: process.env.EVO_API_URL || '',
     instance: process.env.EVO_INSTANCE_NAME || '',
-    apiKey: process.env.EVO_API_KEY || ''
+    apiKey: process.env.EVO_API_KEY || '',
+    webhookUrl: process.env.EVO_WEBHOOK_URL || ''
   },
 
   sms: {
